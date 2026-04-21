@@ -1,0 +1,3 @@
+class ICountriesRepository {
+    function  execute() {}
+}
