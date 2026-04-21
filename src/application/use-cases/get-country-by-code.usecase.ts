@@ -2,9 +2,9 @@
 import { Country } from '../../domain/entities/country';
 
 export class GetCountryByCodeUseCase {
-  constructor(private countriesRepository: ICountriesRepository) {}
+  constructor(private countriesRepository: ICountriesRepository) { }
 
-  async execute(code: string): Promise<Country | null> {
+  async execute(code: string): Promise<Country[]> {
     return await this.countriesRepository.getByCode(code);
   }
 }

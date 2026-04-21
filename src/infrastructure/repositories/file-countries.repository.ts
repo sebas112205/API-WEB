@@ -1,4 +1,4 @@
-﻿import { ICountriesRepository } from '../../domain/repositories/countries-repository';
+import { ICountriesRepository } from '../../domain/repositories/countries-repository';
 import { Country } from '../../domain/entities/country';
 import fs from 'fs/promises';
 import path from 'path';
@@ -8,7 +8,7 @@ export class FileCountriesRepository implements ICountriesRepository {
   private countries: Country[] = [];
 
   constructor() {
-    this.dataPath = path.join(__dirname, '../../data/countries.json');
+    this.dataPath = path.join(process.cwd(), 'src/data/countries.json');
   }
 
   async listAll(): Promise<Country[]> {
@@ -18,19 +18,19 @@ export class FileCountriesRepository implements ICountriesRepository {
     return this.countries;
   }
 
-  async getByCode(code: string): Promise<Country | null> {
+  async getByCode(code: string): Promise<Country[]> {
     if (this.countries.length === 0) {
       await this.loadData();
     }
-    
+
     const countryCode = code.toLowerCase();
-    const country = this.countries.find((c) => {
+    const countries = this.countries.filter((c) => {
       const common = c.name.common.toLowerCase();
       const official = c.name.official.toLowerCase();
       return common.includes(countryCode) || official.includes(countryCode);
     });
 
-    return country || null;
+    return countries;
   }
 
   private async loadData(): Promise<void> {
