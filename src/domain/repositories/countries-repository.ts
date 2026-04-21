@@ -2,5 +2,5 @@
 
 export interface ICountriesRepository {
   listAll(): Promise<Country[]>;
-  getByCode(code: string): Promise<Country[]>;
+  getByName(name: string): Promise<Country[]>;
 }

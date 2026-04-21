@@ -1,9 +1,9 @@
-﻿import { Router } from 'express';
-import { list, getLocation } from '../controllers/paises.controllers';
+import { Router } from 'express';
+import { list, getByName } from '../controllers/paises.controllers';
 
 const router = Router();
 
 router.get('/', list);
-router.get('/:code', getLocation);
+router.get('/:name', getByName);
 
 export default router;

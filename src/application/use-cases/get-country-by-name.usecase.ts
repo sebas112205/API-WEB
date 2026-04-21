@@ -1,10 +1,10 @@
 ﻿import { ICountriesRepository } from '../../domain/repositories/countries-repository';
 import { Country } from '../../domain/entities/country';
 
-export class GetCountryByCodeUseCase {
+export class GetCountryByNameUseCase {
   constructor(private countriesRepository: ICountriesRepository) { }
 
-  async execute(code: string): Promise<Country[]> {
-    return await this.countriesRepository.getByCode(code);
+  async execute(name: string): Promise<Country[]> {
+    return await this.countriesRepository.getByName(name);
   }
 }

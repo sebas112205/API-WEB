@@ -18,19 +18,19 @@ export class FileCountriesRepository implements ICountriesRepository {
     return this.countries;
   }
 
-  async getByCode(code: string): Promise<Country[]> {
+  async getByName(name: string): Promise<Country[]> {
     if (this.countries.length === 0) {
       await this.loadData();
     }
 
-    const countryCode = code.toLowerCase();
-    const countries = this.countries.filter((c) => {
+    const searchTerm = name.toLowerCase();
+    const matchingCountries = this.countries.filter((c) => {
       const common = c.name.common.toLowerCase();
       const official = c.name.official.toLowerCase();
-      return common.includes(countryCode) || official.includes(countryCode);
+      return common.includes(searchTerm) || official.includes(searchTerm);
     });
 
-    return countries;
+    return matchingCountries;
   }
 
   private async loadData(): Promise<void> {
